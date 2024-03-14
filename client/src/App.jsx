@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import Projects from './pages/Projects'
 import { BrowserRouter,Route,Routes  } from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,7 +20,7 @@ export default function App() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/projects" element={<Projects />} />
     </Routes>
-    
+    <Footer/>
     </BrowserRouter>
   )
 }
