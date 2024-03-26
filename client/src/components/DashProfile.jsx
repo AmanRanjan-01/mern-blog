@@ -8,9 +8,10 @@ import {app} from '../firebase.js';
 import {HiOutlineExclamationCircle} from 'react-icons/hi'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import {Link} from 'react-router-dom'
 import { updateStart , updateFailure , updateSuccess,deleteUserFailure,deleteUserStart,deleteUserSuccess, signoutSuccess} from '../redux/user/userSlice.js';
 export default function DashProfile() {
-    const {currentUser, error} = useSelector(state=>state.user)
+    const {currentUser, error,loading} = useSelector(state=>state.user)
     const [imageFile , setImageFile] = useState(null);
     const [imageFileUrl, setImageFileUrl] = useState(null);
     const filePictureRef = useRef();
@@ -175,9 +176,21 @@ export default function DashProfile() {
             <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} onChange={handleChange}/>
             <TextInput type='email' id='email' placeholder='xyz@gmail.com' defaultValue={currentUser.email} onChange={handleChange}/>
             <TextInput type='password' id='password' placeholder='password' onChange={handleChange}/>
-            <Button type='submit' gradientDuoTone='purpleToBlue' outline>
-                Update
+            <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imageFileUploading}>
+                {loading ? 'Loading...' : 'Update'}
             </Button>
+            {
+              currentUser.isAdmin && (
+                <Link to={'/create-post'}>
+                  <Button
+                  type='button'
+                  gradientDuoTone='purpleToPink'
+                  className='w-full'
+                  >
+                    Create a Post
+                  </Button>
+                </Link>
+              )}
         </form>
         <div className='text-red-500 flex justify-between mt-5'>
             <span onClick={()=>setShowModal(true)}className='cursor-pointer'>Delete Account</span>
