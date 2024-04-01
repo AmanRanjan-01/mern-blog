@@ -9,7 +9,7 @@ import commentRoutes from './routes/comment.route.js'
 dotenv.config();
 mongoose.connect(process.env.MONGO)
 .then(()=>{
-    console.log("MongDb is connected");
+    console.log("MongoDb is connected");
 })
 .catch((err)=>{
     console.log(err);
